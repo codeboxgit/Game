@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include <time.h>
 #include <conio.h>
+#include <fmod.h>
 
 int g_nFrameCount;
 
@@ -29,6 +30,10 @@ int _tmain(int argc, _TCHAR* argv[])
 	clock_t CurTime, OldTime;
 	int nKey;
 
+	FMOD_SYSTEM *g_System;
+	FMOD_System_Create(&g_System);
+	FMOD_System_Init(g_System, 32, FMOD_INIT_NORMAL, NULL);
+
 	Init();
 
 	OldTime = clock();
@@ -53,6 +58,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		Update();
 		Render();
+		FMOD_System_Update(g_System);
 
 		while(1)
 		{
